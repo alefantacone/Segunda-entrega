@@ -59,8 +59,11 @@ const productos = [
 
 const carrito = [];
 
-const pintarProductos = () => {
+const pintarProductos = async () => {
     const contenedorProductos = document.getElementById('tienda');
+    const response = await fetch('/productos.json');
+    const productos = await response.json();
+
     productos.forEach(producto => {
         let div = document.createElement('div');
         div.classList.add('col-12', 'col-md-4', 'mb-5', 'd-flex', 'justify-content-center');
@@ -84,7 +87,10 @@ const pintarProductos = () => {
 
 pintarProductos();
 
-const agregarProductosAlCarrito = (id) => {
+const agregarProductosAlCarrito = async (id) => {
+    const response = await fetch('/productos.json');
+    const productos = await response.json();
+
     const agregarCarrito = productos.find(producto => producto.id === id);
 
     const productoRepetido = carrito.find(producto => producto.id === id);
